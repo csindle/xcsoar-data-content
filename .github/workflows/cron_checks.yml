@@ -1,12 +1,13 @@
-name: cron_checks
+name: "Repository URL checker"
 
 on:
   push:
   schedule:
-    - cron: '*/6 * * * *'
+    # 03h43Z everyday
+    - cron: '43 3 * * *'
 
 jobs:
-  check:
+  check_urls:
     runs-on: ubuntu-latest
     environment: production
 

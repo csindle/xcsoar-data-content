@@ -23,6 +23,10 @@ def main(repo_url: str) -> bool:
 
 
 if __name__ == "__main__":
-    if main(repo_url="http://download.xcsoar.org/repository"):
+    url = "http://download.xcsoar.org/repository"
+    if main(repo_url=url):
+        print(f"Download success for all of the URIs in {url}.")
         sys.exit(0)
+
+    print(f"Download FAILURE for some/all of the URIs in {url}.")
     sys.exit(1)

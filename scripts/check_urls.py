@@ -4,9 +4,10 @@
 import sys
 import requests
 from typing import List
+from pathlib import Path
 
 
-def get_urls(repo_url: str) -> List[str]:
+def get_urls_from_www(repo_url: str) -> List[str]:
     """Extract all the URLs after "uri=" at repo_url."""
     repo_req = requests.get(repo_url)
 
@@ -15,6 +16,17 @@ def get_urls(repo_url: str) -> List[str]:
         decoded_line = line.decode("utf-8")
         if decoded_line.startswith("uri="):
             urls.append(decoded_line[4:])
+    return urls
+
+
+def get_urls_from_file(repo_file: Path) -> List[str]:
+    """Extract all the URLs after "uri=" in repo_file."""
+    urls = []
+    with repo_file.open() as in_file:
+        for line in in_file:
+            single_line = line.strip()
+            if single_line.startswith("uri="):
+                urls.append(single_line[4:].strip())
     return urls
 
 
@@ -35,7 +47,9 @@ if __name__ == "__main__":
 
     repository = "http://download.xcsoar.org/repository"
 
-    if check_urls(urls=get_urls(repo_url=repository)):
+    url_list = get_urls_from_www(repo_url=repository)
+    # url_list = get_urls_from_file(repo_file=Path("repository"))
+    if check_urls(urls=url_list):
         print(f"Download success for all of the URIs in {repository}.")
         sys.exit(0)
 

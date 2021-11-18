@@ -1,0 +1,21 @@
+name: Check repository URLs.
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Check URLs"
+        run: |
+          pip install -U requests
+          ./scripts/check_urls.py
+          

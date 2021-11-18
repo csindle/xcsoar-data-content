@@ -1,10 +1,9 @@
-name: Check repository URLs.
+name: cron_checks
 
 on:
   push:
-  pull_request:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/6 * * * *'
 
 jobs:
   check:

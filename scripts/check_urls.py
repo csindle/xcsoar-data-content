@@ -50,8 +50,8 @@ if __name__ == "__main__":
     url_list = get_urls_from_www(repo_url=repository)
     # url_list = get_urls_from_file(repo_file=Path("repository"))
     if check_urls(urls=url_list):
-        print(f"Download success for all of the URIs in {repository}.")
+        print(f"PASS: All URIs downloaded successfully.")
         sys.exit(0)
 
-    print(f"Download FAILURE for some/all of the URIs in {repository}.")
+    print(f"FAIL: some/all URIs could not be downloaded.")
     sys.exit(1)
